@@ -22,7 +22,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.listen(PORT || 8080, () => {
+app.listen(PORT || 3000, () => {
   console.log(`Listening at ${PORT}`);
 });
 
@@ -359,15 +359,14 @@ app.post('/search', (req, res) => {
 answers client request with an object with a bird common name
 to send to api calls for photo, description and sound clip
 */
-
-console.log(req.body);
   getImgDes(req.body.search, (err, response, body) => {
     if (err) {
       console.error(err);
     } const q = JSON.parse(body);
     const k = _.pick(q, ['query']);
     const imgDes = Object.values(k.query.pages);
-    const { description, images } = imgDes[0];
+    const { description, images, pageprops } = imgDes[0];
+    const imgArray = pageprops.page_image_free;
     getClipSci(req.body.search, (erro, response, bod) => {
       if (erro) {
         console.error(erro);
@@ -375,7 +374,7 @@ console.log(req.body);
       const { gen, sp, file } = g.recordings[0];
       const send = {
         descript: description,
-        imgs: images,
+        imgs: imgArray,
         sciName: `${gen} ${sp}`,
         audio: file,
       };

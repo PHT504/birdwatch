@@ -13,6 +13,12 @@ class SimpleForm extends Component {
     this.state = {
       input: '',
       open: false,
+      data: [{
+        descript: '',
+        imgs: 'yuiopoiuy',
+        sciName: '',
+        audio: '',
+      }],
     };
     // this.onChange = input => this.setState({ input });
     this.handleChange = this.handleChange.bind(this);
@@ -20,12 +26,14 @@ class SimpleForm extends Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
   }
-  handleOpen() {
+  handleOpen(info) {
     this.setState({ open: true });
+    this.setState({ data: info });
   }
   handleClose() {
     this.setState({ open: false });
   }
+
   
   handleFormSubmit(event) {
     event.preventDefault();
@@ -37,9 +45,9 @@ class SimpleForm extends Component {
     console.log(this.state.input);
     axios.post('/search', {
       search: this.state.input,
-    }).then((res) => {
-      if (res) {
-        this.handleOpen();
+    }).then(({ data }) => {
+      if (data) {
+        this.handleOpen([data]);
       }
     }).catch((err) => {
       console.error(err);
@@ -69,7 +77,7 @@ class SimpleForm extends Component {
               <TextField name="text" placeholder="search" value={this.state.value} onChange={this.handleChange} />
             </form>
             <Dialog open={this.state.open}>
-              <BirdCallInfo />
+              <BirdCallInfo props={this.state.data} />
               {actions}
             </Dialog>
             <Footer />

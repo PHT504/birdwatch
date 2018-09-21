@@ -16,7 +16,7 @@ const eBird = (callback) => {
       'X-eBirdApiToken': key.ebirdKEY,
     },
   };
-  request('', options, (err, response, body) => {
+  request('https://ebird.org/ws2.0/data/obs/US-LA-071/recent', options, (err, response, body) => {
     if (err) {
       console.error(err);
     } callback(err, response, body);
