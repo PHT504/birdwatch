@@ -24,6 +24,7 @@ class Timeline extends Component {
   }
   loadFeed() {
     axios.get('/birds').then(({ data }) => {
+      console.log(data);
       this.setState({ birdFeed: data });
     });
     console.log(this.state.birdFeed);

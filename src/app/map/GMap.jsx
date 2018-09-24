@@ -39,11 +39,10 @@ class GMap extends Component {
               name={`${bird.comName}(${bird.howMany})`}
               date={`Last seen ${Moment(bird.obsDt).fromNow()}`}
               sciName={`Sci name: ${bird.sciName}`}
-              loc={`Location: ${bird.locName}`}
+              loc={`Location: ${bird.locName}` }
               key={i}
               icon={BirdLogo}
               position={{ lat: lat, lng: lng }}
-          
             />
           );
         })}

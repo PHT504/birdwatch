@@ -32,6 +32,7 @@ class MapContainer extends Component {
     this.setState({ latLng: data });
   }
   birdCatcher(data) {
+    data.push({ lat: 29.9934, lng: -90.0982, sciName: 'connor',comName: 'Black Vulture', locName: 'City Park, New Orleans, LA' });
     this.setState({ birdData: data });
   }
   /*
@@ -43,16 +44,22 @@ class MapContainer extends Component {
     axios.get('/map')
     .then(({ data }) => {
       const { bldata, locations, birds } = data;
-      console.log(bldata, locations, birds, _);
-      console.log(_.flatten(locations));
+      // console.log(bldata, locations, birds, _);
+      const locs =_.flatten(locations);
       console.log(_.flatten(birds));
+      const array = [];
+      for(var i = 0; i < locs.length; i++) {
+        array.push(locs[i]);
+      }
+      console.log(array);
+      
     });
   }
 
   eBird() {
     axios.get('/eBird')
    .then(({ data }) => {
-    // console.log(data);
+    console.log(data);
      this.birdCatcher(data);
    });
   }

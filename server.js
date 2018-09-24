@@ -9,9 +9,10 @@ const bcrypt = require('bcrypt');
 const path = require('path');
 const { eBird, sciName, coords, getImgDes, getClipSci } = require('./utils/utils');
 const _ = require('lodash');
+const config = require('./config.js');
 
 
-const PORT = process.env.PORT;
+const PORT = config.PORT;
 const app = express();
 
 app.use((req, res, next) => {
